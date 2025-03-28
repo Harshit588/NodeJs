@@ -20,17 +20,7 @@ connection.query(sql, function (err, result) {
   console.log(
     result.forEach(function (row) {
       console.log(
-        row.id +
-          " " +
-          row.name +
-          " " +
-          row.age +
-          " " +
-          row.gender +
-          " " +
-          row.city +
-          " " +
-          row.phoneNo
+        `${row.id} | ${row.name} | ${row.age} | ${row.gender} | ${row.city} | ${row.phoneNo}`
       );
     })
   );
