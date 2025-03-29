@@ -1,0 +1,63 @@
+/*
+Complete notes of NodeJS =>
+
+    setup => Download and install NodeJS
+    check version => node -v
+    check npm version => npm -v 
+    check node version => node --version
+
+    npm init => Create a package.json file (
+        package name: "default",
+        version: "1.0.0",
+        description: "default",
+        entry point: "app.js",  
+        test command: 
+        git repository: "default",
+        keywords: "default",
+        author: "default",
+        license: "ISC",   
+        ) -> create package.json file(Configuration file)
+                     or
+    npm init -y => Create a package.json file with default values
+
+    npm install => Install all the dependencies
+
+1. Hello World
+    - Create a file named app.js
+    - Write the following code in app.js
+        console.log("Hello World");
+    - Run the file using the command => node app.js
+    - Output => Hello World
+
+    Inside package.json file
+        "scripts": {
+            "start": "node app.js"
+        }
+    - Run the file using the command => npm start
+    - Output => Hello World
+
+ 2. Module
+    - Create a file named Math.js
+    - create a file named App.js 
+
+        - Write the following code in Math.js
+            function add(a, b) {
+                return a + b;
+            }
+            function sub(a, b) {
+                return a - b;
+            }
+            function mul(a, b) {
+                return a * b;
+            }
+            function div(a, b) {
+                return a / b;
+            }
+            module.exports = { add, sub, mul, div };
+            
+        - Write the following code in App.js
+            const math = require('./Math.js');
+            console.log(math.add(2, 3));
+            console.log(math.sub(5, 3));
+            console.log(math.mul(2, 3));
+            console.log(math.div(6, 3));
