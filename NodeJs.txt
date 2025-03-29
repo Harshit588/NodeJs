@@ -1,7 +1,7 @@
-/*
+
 Complete notes of NodeJS =>
 
-    setup => Download and install NodeJS
+1. setup => Download and install NodeJS
     check version => node -v
     check npm version => npm -v 
     check node version => node --version
@@ -22,7 +22,7 @@ Complete notes of NodeJS =>
 
     npm install => Install all the dependencies
 
-1. Hello World
+2. Hello World
     - Create a file named app.js
     - Write the following code in app.js
         console.log("Hello World");
@@ -36,7 +36,7 @@ Complete notes of NodeJS =>
     - Run the file using the command => npm start
     - Output => Hello World
 
- 2. Module
+3. Modules in NodeJS => 
     - Create a file named Math.js
     - create a file named App.js 
 
@@ -53,11 +53,46 @@ Complete notes of NodeJS =>
             function div(a, b) {
                 return a / b;
             }
+
+            // Export the functions (to exports multiple functions use object{} or module.exports)
+            1. Using module.exports
+                module.exports.add = add;
+                module.exports.sub = sub;
+                module.exports.mul = mul;
+                module.exports.div = div;
+
+            2. Using object
+                module.exports = {
+                    add: add,
+                    sub: sub,
+                    mul: mul,
+                    div: div
+                };
+
+            // 3. Using ES6 shorthand syntax
+            // const add = (a, b) => a + b;
+            // const sub = (a, b) => a - b;
+            // const mul = (a, b) => a * b;
+            // const div = (a, b) => a / b;     
+            // module.exports = { add, sub, mul, div };
             module.exports = { add, sub, mul, div };
-            
-        - Write the following code in App.js
+
+        - Write the following code in App.js =>
+
+            // Import the Math module
             const math = require('./Math.js');
             console.log(math.add(2, 3));
             console.log(math.sub(5, 3));
             console.log(math.mul(2, 3));
             console.log(math.div(6, 3));
+    Summary => 
+        - Create a file named Math.js
+        - Write the functions in Math.js
+        - Export the functions using module.exports or exports
+        - Create a file named App.js
+        - Import the Math module using require()
+        - Use the functions in App.js
+        - Run the file using the command => node App.js
+        - Output => 5, 2, 6, 2
+
+4. File Handling =>
