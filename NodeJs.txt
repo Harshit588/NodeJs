@@ -95,4 +95,149 @@ Complete notes of NodeJS =>
         - Run the file using the command => node App.js
         - Output => 5, 2, 6, 2
 
-4. File Handling =>
+4. File Handling => 
+
+    require('fs') => File System module
+
+        operations 1 => create a file in Current Directory 
+            - Create a file named test.txt
+            - Write the following code in test.txt
+                Hii Harshit 1 times...
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.writeFileSync('./test.txt', 'Hii Harshit 1 times...')
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.writeFile('./test.txt', 'Hii Harshit 1 times...', function(err) {
+                        if (err) throw err;
+                        console.log('File created!');
+                    });
+                - Output => File created!
+           
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.writeFile('./test.txt', 'Hii Harshit 1 times...', (err) => {
+                        if (err) throw err;
+                        console.log('File created!');
+                    });
+                - Output => File created!
+
+
+        operations 2 => Read a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    var data = fs.readFileSync('./test.txt', 'utf8');
+                    console.log(data);
+                //utf8 is the encoding format
+                - Output => Hii Harshit 1 times...
+           
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.readFile('./test.txt', 'utf8', (err, data) => {
+                        if (err) throw err;
+                        console.log(data);
+                    });
+                - Output => Hii Harshit 1 times...
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.readFile('./test.txt', 'utf8', (err, data) => {
+                        if (err) throw err;
+                        console.log(data);
+                    });
+                - Output => Hii Harshit 1 times...
+
+        operations 3 => Append a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.appendFileSync('./test.txt', 'Hii Harshit 2 times...')
+                - Output => Hii Harshit 1 times...Hii Harshit 2 times...
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.appendFile('./test.txt', 'Hii Harshit 2 times...', (err) => {
+                        if (err) throw err;
+                        console.log('File appended!');
+                    });
+                - Output => File appended!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.appendFile('./test.txt', 'Hii Harshit 2 times...', (err) => {
+                        if (err) throw err;
+                        console.log('File appended!');
+                    });
+                - Output => File appended!    
+                        
+        operations 4 => Delete a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.unlinkSync('./test.txt')
+                - Output => test.txt deleted!
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.unlink('./test.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File deleted!');
+                    });
+                - Output => File deleted!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.unlink('./test.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File deleted!');
+                    });
+                - Output => File deleted!
+
+        operations 5 => Rename a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.renameSync('./test.txt', './test1.txt')
+                - Output => test.txt renamed to test1.txt
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.rename('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File renamed!');
+                    });
+                - Output => File renamed!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.rename('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File renamed!');
+                    });
+                - Output => File renamed!
+
+        operations 6 => get a copy of that file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.copyFileSync('./test.txt', './test1.txt')
+                - Output => test.txt copied to test1.txt
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.copyFile('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File copied!');
+                    });
+                - Output => File copied!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.copyFile('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File copied!');
+                    });
+                - Output => File copied!      
+
+        operations 7 => get a copy of that file in Current Directory
+        operations 8 => close a file in Current Directory
+        operations 9 => open a file in Current Directory
+        operations 10 => get a file status in Current Directory
+        operations 11 => get a file information in Current Directory
