@@ -241,3 +241,16 @@ Complete notes of NodeJS =>
         operations 9 => open a file in Current Directory
         operations 10 => get a file status in Current Directory
         operations 11 => get a file information in Current Directory
+
+5. NodeJs Architecture => 
+    - NodeJs is a single-threaded, non-blocking, asynchronous, event-driven JavaScript runtime environment.
+    - It uses the V8 JavaScript engine to execute JavaScript code.
+    - It uses an event loop to handle asynchronous operations.
+    - It uses a callback function to handle the result of an asynchronous operation.
+    - It uses a thread pool to handle blocking operations.
+    - It uses a libuv library to handle I/O operations.
+    - It uses a cluster module to create multiple instances of NodeJs to handle multiple requests.
+    - It uses a child process module to create child processes to handle multiple requests.
+    - It uses a worker thread module to create worker threads to handle multiple requests.
+
+6. Building a Http Server in NodeJs =>     
