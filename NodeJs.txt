@@ -22,7 +22,7 @@ Complete notes of NodeJS =>
 
     npm install => Install all the dependencies
 
-2. Hello World
+2. Hello World program =>
     - Create a file named app.js
     - Write the following code in app.js
         console.log("Hello World");
@@ -253,4 +253,52 @@ Complete notes of NodeJS =>
     - It uses a child process module to create child processes to handle multiple requests.
     - It uses a worker thread module to create worker threads to handle multiple requests.
 
-6. Building a Http Server in NodeJs =>     
+6. Building a Http Server in NodeJs =>
+
+        
+    // To stop the server in Terminal use ctrl+c
+
+    Example 1 =>
+        const http = require('http'); // import http module
+        const myServer = http.createServer((request, response) => {
+            console.log("Hello Request Revieve"); // log the request
+            response.end('Hello From Server') // send response to client
+        });
+        myServer.listen(7777, () => console.log("Server Started"))// start the server on port 7777
+        // listen for incoming requests
+        
+        - Output => Server Started
+        - Open the browser and type => http://localhost:7777
+        - Output => Hello From Server
+
+    Example 2 =>
+        const http = require('http'); // Import http module
+        const file = require('fs'); // Import fs module
+
+        const myServer = http.createServer((request, response) => {
+            const log = `\nRequest at :: ${Date.now().toLocaleString()} Request for :: ${request.url}` // log the request
+            file.appendFile('logs.txt', log, (err) => {
+                if (err) {
+                    console.error('Error writing to log file:', err); // Handle error
+                }
+            })
+            switch (request.url) {
+                case '/': response.end('Hello From Home Page'); break; // Home page
+                case '/about': response.end('I am Harshit Soni'); break;// About page
+                case '/project': response.end('Project Sections...'); break;// Project page
+                default: response.end('Hello From Home Page');// Default page
+            }
+        });
+        myServer.listen(7777, () => console.log("Server Started")) // Start the server on port 7777 and listen for incoming requests
+            Outputs=>
+                // Output => Server Started
+                // Open the browser and type => http://localhost:7777
+                // Output => Hello From Home Page
+                // Open the browser and type => http://localhost:7777/about
+                // Output => I am Harshit Soni
+                // Open the browser and type => http://localhost:7777/project
+                // Output => Project Sections...
+                // Open the browser and type => http://localhost:7777/anything
+                // Output => Hello From Home Page
+
+7. 
