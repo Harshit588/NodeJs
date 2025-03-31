@@ -432,3 +432,10 @@ Complete notes of NodeJS =>
             });
 
 10. Versioning in ExpressJs =>
+            Example => 4.18.2
+            part1 -> 4(major update)
+            part2 -> 18(Bug fix)
+            part3 -> 2(minor update)
+
+            => install specific version of express => npm install express@4.18.2
+            => install latest version of express => npm install express@latest
