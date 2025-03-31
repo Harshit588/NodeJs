@@ -403,12 +403,30 @@ Complete notes of NodeJS =>
     - PATCH => Used to apply partial modifications to a resource.
 
 9. Introduction to ExpressJS =>
-        - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+
+        Question => Why we need ExpressJS?
+        Answer =>
+        - Express is a web application framework for Node.js.
         - It is designed for building web applications and APIs.
         - It is built on top of Node.js and provides a simple way to create web servers and handle HTTP requests and responses.
         - It is a lightweight framework that is easy to learn and use.
         - It is a popular choice for building RESTful APIs and single-page applications (SPAs).
         - It is used by many large companies and organizations, including IBM, Uber, and PayPal.
         - It is open-source and has a large community of developers who contribute to its development and maintenance.
-    
-        install express => npm install express
+
+        => install express => npm install express
+
+        Example =>
+            const express = require('express'); // Import express module
+            const app = express(); // Create an instance of express
+
+            app.get('/', (req, res) => { // Handle GET request to the root URL
+                res.send('Hello World'); // Send response to client
+            });
+            app.get('/about', (req, res) => { // Handle GET request to the /about URL
+                res.send('Hello From About Page') // Send response to client
+            })
+
+            app.listen(3000, () => { // Start the server on port 3000
+                console.log('Server started on port 3000'); // Log the server start message
+            });
