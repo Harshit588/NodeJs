@@ -1,27 +1,17 @@
-var mysql = require("mysql");
+const mysql = require('mysql');
 
-// Create mySql connection using phpmyadmin credentials
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root12345",
-  database: "sqlpractice",
+const connection = mysql.createConnection({
+  host: 'localhost',  // Use 127.0.0.1 to avoid potential issues with localhost
+  user: 'root',
+  password: 'root12345',  // Use the correct password here
+  database: 'user',  // Replace with the actual database you're connecting to
+  port: 3306,  // Default MySQL port
 });
 
-connection.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected to MySQL database!");
-});
-
-// crate Select query to fetch all records from the table
-var sql = "SELECT * FROM student";
-connection.query(sql, function (err, result) {
-  if (err) throw err;
-  console.log(
-    result.forEach(function (row) {
-      console.log(
-        `${row.id} | ${row.name} | ${row.age} | ${row.gender} | ${row.city} | ${row.phoneNo}`
-      );
-    })
-  );
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database: ' + err.stack);
+    return;
+  }
+  console.log('Connected to the MySQL server');
 });
