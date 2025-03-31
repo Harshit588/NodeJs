@@ -19,12 +19,11 @@ const myServer = http.createServer((request, response) => {
 });
 myServer.listen(7777, () => console.log("Server Started")) // Start the server on port 7777 and listen for incoming requests
 
-*/
-const http = require('http'); // Import http module
+*/const http = require('http'); // Import http module
 const file = require('fs'); // Import fs module
 const { URL } = require('url'); // Import URL class
 
-const myServer = http.createServer((request, response) => {
+function myHandler(request, response) {
     if (request.url === '/favicon.ico') {
         response.end();
         return; // Exit the function to prevent further execution
@@ -51,8 +50,11 @@ const myServer = http.createServer((request, response) => {
             response.end('Project Sections...');
             break; // Project page
         default:
-            response.end('Hello From Home Page'); // Default page
+            response.statusCode = 404; // Set HTTP status code to 404
+            response.end('404 Not Found'); // Default page for unknown paths
     }
-});
+}
 
-myServer.listen(7000, () => console.log("Server Started")); // Start the server on port 7000
+const myServer = http.createServer(myHandler);
+
+myServer.listen(7000, () => console.log("Server Started on port 7000")); // Start the server on port 7000

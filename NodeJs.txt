@@ -401,4 +401,14 @@ Complete notes of NodeJS =>
         )
     - DELETE => Used to delete the specified resource.
     - PATCH => Used to apply partial modifications to a resource.
-    Example => 
+
+9. Introduction to ExpressJS =>
+        - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+        - It is designed for building web applications and APIs.
+        - It is built on top of Node.js and provides a simple way to create web servers and handle HTTP requests and responses.
+        - It is a lightweight framework that is easy to learn and use.
+        - It is a popular choice for building RESTful APIs and single-page applications (SPAs).
+        - It is used by many large companies and organizations, including IBM, Uber, and PayPal.
+        - It is open-source and has a large community of developers who contribute to its development and maintenance.
+    
+        install express => npm install express
