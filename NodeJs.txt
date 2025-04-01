@@ -469,3 +469,8 @@ Complete notes of NodeJS =>
         POST /api/users -> Create a new user
         PATCH /api/users/{id} -> Update user by id
         DELETE /api/users/{id} -> Delete user by id
+
+
+Create a middleware to get the data come from frontend 
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data
+       
