@@ -1,0 +1,14 @@
+++++++++++++ TASK ++++++++++++
+Create a REST API for managing users with the following endpoints:
+
+REST API -> JSON
+
+GET /users -> List all user Name -> DONE
+GET /api/users -> List all user -> DONE
+
+GET /api/users/:id -> Get user by id // dynamic path parameter -> DONE
+:id => dynamic path parameter
+
+POST /api/users -> Create a new user
+PATCH /api/users/{id} -> Update user by id
+DELETE /api/users/{id} -> Delete user by id

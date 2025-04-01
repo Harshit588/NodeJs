@@ -437,5 +437,35 @@ Complete notes of NodeJS =>
             part2 -> 18(Bug fix)
             part3 -> 2(minor update)
 
+            ^ => meaning=>   install latest version of express => npm install express@^4.18.2
+            ~ => install latest version of express => npm install express@~4.18.2
+
             => install specific version of express => npm install express@4.18.2
             => install latest version of express => npm install express@latest
+
+11. Intro to Rest API =>
+        Rules=>
+        - user server client architecture    
+        - Use HTTP methods to perform CRUD operations
+        - Use URL to identify the resource
+        - Use JSON to send and receive data
+        - Use status codes to indicate the success or failure of the request
+        - Use versioning to manage changes to the API
+        - Use authentication and authorization to secure the API
+        
+12. Build Rest Api =>  
+        
+        ++++++++++++ TASK ++++++++++++
+        Create a REST API for managing users with the following endpoints:
+
+        REST API -> JSON
+
+        GET /users -> List all user Name -> DONE
+        GET /api/users -> List all user -> DONE
+
+        GET /api/users/:id -> Get user by id // dynamic path parameter -> DONE
+        :id => dynamic path parameter
+
+        POST /api/users -> Create a new user
+        PATCH /api/users/{id} -> Update user by id
+        DELETE /api/users/{id} -> Delete user by id
