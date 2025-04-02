@@ -1,6 +1,11 @@
 Complete notes of NodeJS =>
 
+    auto Save and auto run the code use 
+    - nodemon => npm install -g nodemon
+    - nodemon app.js => run the file using nodemon
+
 1. setup => Download and install NodeJS
+
     check version => node -v
     check npm version => npm -v 
     check node version => node --version
@@ -20,6 +25,7 @@ Complete notes of NodeJS =>
     npm init -y => Create a package.json file with default values
 
     npm install => Install all the dependencies
+    npm install nodemon => Install nodemon package
 
 2. Hello World program =>
     - Create a file named app.js
@@ -585,7 +591,11 @@ Complete notes of NodeJS =>
 15. Statud Codes in Express => 
         1. Informational responses (100-199)
         2. Successful responses (200-299)
+            1. OK (200) -> Method: GET
+            2. Created (201) -> Method: POST, PUT, PATCH
+            3. Accepted (202) -> Method: POST, PUT, PATCH
+            4. Non-authoritative information (203) -> Method: GET
         3. Redirection messages (300-399)
         4. Client error responses (400-499)
         5. Server error responses (500-599)
-        
+
