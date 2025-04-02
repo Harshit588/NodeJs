@@ -476,6 +476,7 @@ Complete notes of NodeJS =>
         DELETE /api/users/{id} -> Delete user by id
 
 13. Middleware in Express => 
+
     - Middleware is a function that has access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle.
    
     - Middleware can perform the following tasks:
@@ -590,12 +591,25 @@ Complete notes of NodeJS =>
 
 15. Statud Codes in Express => 
         1. Informational responses (100-199)
+
         2. Successful responses (200-299)
             1. OK (200) -> Method: GET
             2. Created (201) -> Method: POST, PUT, PATCH
             3. Accepted (202) -> Method: POST, PUT, PATCH
             4. Non-authoritative information (203) -> Method: GET
+            5. No content (204) -> Method: GET, POST, PUT, PATCH
+            6. Reset content (205) -> Method: GET, POST, PUT, PATCH
+
         3. Redirection messages (300-399)
+
         4. Client error responses (400-499)
+            1. Bad request (400) -> Method: GET, POST, PUT, PATCH
+            2. Unauthorized (401) -> Method: GET, POST, PUT, PATCH  
+            3. Payment required (402) -> Method: GET, POST, PUT, PATCH
+            4. Forbidden (403) -> Method: GET, POST, PUT, PATCH
+            5. Not found (404) -> Method: GET, POST, PUT, PATCH 
+            6. Method not allowed (405) -> Method: GET, POST, PUT, PATCH
+
         5. Server error responses (500-599)
+            
 
