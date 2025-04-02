@@ -511,3 +511,49 @@ Complete notes of NodeJS =>
             // Output => Middleware function called
             // Open the browser and type => http://localhost:3000
             // Output => Hello World
+
+14. Headers in Express =>
+    - Headers are key-value pairs that are sent in the request and response objects.
+    - Headers can be used to send additional information about the request or response.
+    - Headers can be used to control the behavior of the request or response.
+    - Headers can be used to send metadata about the request or response.
+    - Headers can be used to send authentication information.
+    - Headers can be used to send content type information.
+    - Headers can be used to send caching information.
+    - Headers can be used to send security information.
+
+    Example1 => Built-In Headers =>
+
+        const express = require('express'); // Import express module
+        const app = express(); // Create an instance of express
+
+        app.get('/', (req, res) => { // Handle GET request to the root URL
+            res.setHeader('Content-Type', 'text/html'); // Set the content type header
+            res.send('<h1>Hello World</h1>'); // Send response to client
+        });
+
+        app.listen(3000, () => { // Start the server on port 3000
+            console.log('Server started on port 3000'); // Log the server start message
+        });
+        Output => 
+            // Output => Server started on port 3000
+            // Open the browser and type => http://localhost:3000
+            // Output => Hello World
+
+    Example2 => Custom Headers => 
+        const express = require('express'); // Import express module
+        const app = express(); // Create an instance of express
+
+        app.get('/', (req, res) => { // Handle GET request to the root URL
+            res.setHeader('X-Powered-By', 'Node.js'); // Set a custom header
+            res.send('<h1>Hello World</h1>'); // Send response to client
+        });
+
+        app.listen(3000, () => { // Start the server on port 3000
+            console.log('Server started on port 3000'); // Log the server start message
+        });
+        Output => 
+            // Output => Server started on port 3000
+            // Open the browser and type => http://localhost:3000
+            // Output => Hello World
+        
