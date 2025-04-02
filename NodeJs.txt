@@ -1,0 +1,476 @@
+
+Complete notes of NodeJS =>
+
+1. setup => Download and install NodeJS
+    check version => node -v
+    check npm version => npm -v 
+    check node version => node --version
+
+    npm init => Create a package.json file (
+        package name: "default",
+        version: "1.0.0",
+        description: "default",
+        entry point: "app.js",  
+        test command: 
+        git repository: "default",
+        keywords: "default",
+        author: "default",
+        license: "ISC",   
+        ) -> create package.json file(Configuration file)
+                     or
+    npm init -y => Create a package.json file with default values
+
+    npm install => Install all the dependencies
+
+2. Hello World program =>
+    - Create a file named app.js
+    - Write the following code in app.js
+        console.log("Hello World");
+    - Run the file using the command => node app.js
+    - Output => Hello World
+
+    Inside package.json file
+        "scripts": {
+            "start": "node app.js"
+        }
+    - Run the file using the command => npm start
+    - Output => Hello World
+
+3. Modules in NodeJS => 
+    - Create a file named Math.js
+    - create a file named App.js 
+
+        - Write the following code in Math.js
+            function add(a, b) {
+                return a + b;
+            }
+            function sub(a, b) {
+                return a - b;
+            }
+            function mul(a, b) {
+                return a * b;
+            }
+            function div(a, b) {
+                return a / b;
+            }
+
+            // Export the functions (to exports multiple functions use object{} or module.exports)
+            1. Using module.exports
+                module.exports.add = add;
+                module.exports.sub = sub;
+                module.exports.mul = mul;
+                module.exports.div = div;
+
+            2. Using object
+                module.exports = {
+                    add: add,
+                    sub: sub,
+                    mul: mul,
+                    div: div
+                };
+
+            // 3. Using ES6 shorthand syntax
+            // const add = (a, b) => a + b;
+            // const sub = (a, b) => a - b;
+            // const mul = (a, b) => a * b;
+            // const div = (a, b) => a / b;     
+            // module.exports = { add, sub, mul, div };
+            module.exports = { add, sub, mul, div };
+
+        - Write the following code in App.js =>
+
+            // Import the Math module
+            const math = require('./Math.js');
+            console.log(math.add(2, 3));
+            console.log(math.sub(5, 3));
+            console.log(math.mul(2, 3));
+            console.log(math.div(6, 3));
+    Summary => 
+        - Create a file named Math.js
+        - Write the functions in Math.js
+        - Export the functions using module.exports or exports
+        - Create a file named App.js
+        - Import the Math module using require()
+        - Use the functions in App.js
+        - Run the file using the command => node App.js
+        - Output => 5, 2, 6, 2
+
+4. File Handling => 
+
+    require('fs') => File System module
+
+        operations 1 => create a file in Current Directory 
+            - Create a file named test.txt
+            - Write the following code in test.txt
+                Hii Harshit 1 times...
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.writeFileSync('./test.txt', 'Hii Harshit 1 times...')
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.writeFile('./test.txt', 'Hii Harshit 1 times...', function(err) {
+                        if (err) throw err;
+                        console.log('File created!');
+                    });
+                - Output => File created!
+           
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.writeFile('./test.txt', 'Hii Harshit 1 times...', (err) => {
+                        if (err) throw err;
+                        console.log('File created!');
+                    });
+                - Output => File created!
+
+
+        operations 2 => Read a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    var data = fs.readFileSync('./test.txt', 'utf8');
+                    console.log(data);
+                //utf8 is the encoding format
+                - Output => Hii Harshit 1 times...
+           
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.readFile('./test.txt', 'utf8', (err, data) => {
+                        if (err) throw err;
+                        console.log(data);
+                    });
+                - Output => Hii Harshit 1 times...
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.readFile('./test.txt', 'utf8', (err, data) => {
+                        if (err) throw err;
+                        console.log(data);
+                    });
+                - Output => Hii Harshit 1 times...
+
+        operations 3 => Append a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.appendFileSync('./test.txt', 'Hii Harshit 2 times...')
+                - Output => Hii Harshit 1 times...Hii Harshit 2 times...
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.appendFile('./test.txt', 'Hii Harshit 2 times...', (err) => {
+                        if (err) throw err;
+                        console.log('File appended!');
+                    });
+                - Output => File appended!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.appendFile('./test.txt', 'Hii Harshit 2 times...', (err) => {
+                        if (err) throw err;
+                        console.log('File appended!');
+                    });
+                - Output => File appended!    
+                        
+        operations 4 => Delete a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.unlinkSync('./test.txt')
+                - Output => test.txt deleted!
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.unlink('./test.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File deleted!');
+                    });
+                - Output => File deleted!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.unlink('./test.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File deleted!');
+                    });
+                - Output => File deleted!
+
+        operations 5 => Rename a file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.renameSync('./test.txt', './test1.txt')
+                - Output => test.txt renamed to test1.txt
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.rename('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File renamed!');
+                    });
+                - Output => File renamed!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.rename('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File renamed!');
+                    });
+                - Output => File renamed!
+
+        operations 6 => get a copy of that file in Current Directory
+            - Write the following code in app.js -> in sync way
+                    var fs = require('fs');
+                    fs.copyFileSync('./test.txt', './test1.txt')
+                - Output => test.txt copied to test1.txt
+            
+            - Write the following code in app.js -> in async way
+                    var fs = require('fs');
+                    fs.copyFile('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File copied!');
+                    });
+                - Output => File copied!
+            
+            - Write the following code in app.js -> in async way with callback
+                    var fs = require('fs');
+                    fs.copyFile('./test.txt', './test1.txt', (err) => {
+                        if (err) throw err;
+                        console.log('File copied!');
+                    });
+                - Output => File copied!      
+
+        operations 7 => get a copy of that file in Current Directory
+        operations 8 => close a file in Current Directory
+        operations 9 => open a file in Current Directory
+        operations 10 => get a file status in Current Directory
+        operations 11 => get a file information in Current Directory
+
+5. NodeJs Architecture => 
+    - NodeJs is a single-threaded, non-blocking, asynchronous, event-driven JavaScript runtime environment.
+    - It uses the V8 JavaScript engine to execute JavaScript code.
+    - It uses an event loop to handle asynchronous operations.
+    - It uses a callback function to handle the result of an asynchronous operation.
+    - It uses a thread pool to handle blocking operations.
+    - It uses a libuv library to handle I/O operations.
+    - It uses a cluster module to create multiple instances of NodeJs to handle multiple requests.
+    - It uses a child process module to create child processes to handle multiple requests.
+    - It uses a worker thread module to create worker threads to handle multiple requests.
+
+6. Building a Http Server in NodeJs =>
+
+        
+    // To stop the server in Terminal use ctrl+c
+
+    Example 1 =>
+        const http = require('http'); // import http module
+        const myServer = http.createServer((request, response) => {
+            console.log("Hello Request Revieve"); // log the request
+            response.end('Hello From Server') // send response to client
+        });
+        myServer.listen(7777, () => console.log("Server Started"))// start the server on port 7777
+        // listen for incoming requests
+        
+        - Output => Server Started
+        - Open the browser and type => http://localhost:7777
+        - Output => Hello From Server
+
+    Example 2 =>
+        const http = require('http'); // Import http module
+        const file = require('fs'); // Import fs module
+
+        const myServer = http.createServer((request, response) => {
+            const log = `\nRequest at :: ${Date.now().toLocaleString()} Request for :: ${request.url}` // log the request
+            file.appendFile('logs.txt', log, (err) => {
+                if (err) {
+                    console.error('Error writing to log file:', err); // Handle error
+                }
+            })
+            switch (request.url) {
+                case '/': response.end('Hello From Home Page'); break; // Home page
+                case '/about': response.end('I am Harshit Soni'); break;// About page
+                case '/project': response.end('Project Sections...'); break;// Project page
+                default: response.end('Hello From Home Page');// Default page
+            }
+        });
+        myServer.listen(7777, () => console.log("Server Started")) // Start the server on port 7777 and listen for incoming requests
+            Outputs=>
+                // Output => Server Started
+                // Open the browser and type => http://localhost:7777
+                // Output => Hello From Home Page
+                // Open the browser and type => http://localhost:7777/about
+                // Output => I am Harshit Soni
+                // Open the browser and type => http://localhost:7777/project
+                // Output => Project Sections...
+                // Open the browser and type => http://localhost:7777/anything
+                // Output => Hello From Home Page
+
+7. Handling URL in NodeJS =>
+    Basic ->
+        1. url => http://www.harshit.com/about?name=harshit&age=20
+            - protocol => http
+            - host => www.harshit.com
+            - path => /about
+            - query => name=harshit&age=20
+            - pathname => /about
+            - search => ?name=harshit&age=20
+        2. Install url module
+            - npm install url // Install url module,now use const url = require('url');
+                - const url = require('url'); // Import url module
+        3. Example1 => 
+            const http = require('http'); // Import http module
+            const url = require('url'); // Import url module
+
+            const myServer = http.createServer((request, response) => {
+                const myUrl = new URL(request.url, `http://${request.headers.host}`); // Create a new URL object
+                console.log(myUrl); // Log the URL object
+                console.log(myUrl.pathname); // Log the pathname
+                console.log(myUrl.searchParams.get('name')); // Log the name parameter
+                console.log(myUrl.searchParams.get('age')); // Log the age parameter
+                response.end('Hello From Server') // Send response to client
+            });
+            myServer.listen(7777, () => console.log("Server Started")) // Start the server on port 7777 and listen for incoming requests
+            Outputs=>
+                // Output => Server Started
+                // Open the browser and type => http://localhost:7777/about?name=harshit&age=20
+                // Output => Hello From Server
+                // URL {
+                //   href: 'http://localhost:7777/about?name=harshit&age=20',
+                //   origin: 'http://localhost:7777',
+                //   protocol: 'http:',
+                //   username: '',
+                //   password: '',
+                //   host: 'localhost:7777',
+                //   hostname: 'localhost',
+                //   port: '7777',
+                //   pathname: '/about',
+                //   search: '?name=harshit&age=20',
+                //   searchParams: URLSearchParams { 'name' => 'harshit', 'age' => '20' },
+                //   hash: ''
+                // }
+        4. Example2=>   
+            const http = require('http'); // Import http module
+            const file = require('fs'); // Import fs module
+            const { URL } = require('url'); // Import URL class
+
+            const myServer = http.createServer((request, response) => {
+                if (request.url === '/favicon.ico') {
+                    response.end();
+                    return; // Exit the function to prevent further execution
+                }
+
+                const myUrl = new URL(request.url, `http://${request.headers.host}`); // Parse the URL
+                const userName = myUrl.searchParams.get('myname'); // Get the 'myname' query parameter
+
+                const log = `\nRequest at :: ${new Date().toLocaleString()} Request for :: ${request.url}`; // Log the request
+                file.appendFile('logs.txt', log, (err) => {
+                    if (err) {
+                        console.error('Error writing to log file:', err); // Handle error
+                    }
+                });
+
+                switch (myUrl.pathname) {
+                    case '/':
+                        response.end(`Hello ${userName || 'Guest'} From Home Page`); // Default to 'Guest' if no name is provided
+                        break; // Home page
+                    case '/about':
+                        response.end('I am Harshit Soni');
+                        break; // About page
+                    case '/project':
+                        response.end('Project Sections...');
+                        break; // Project page
+                    default:
+                        response.end('Hello From Home Page'); // Default page
+                }
+            });
+
+            myServer.listen(7000, () => console.log("Server Started")); // Start the server on port 7000     
+            Output => 
+                // Output => Server Started
+                // Open the browser and type => http://localhost:7000/about?myname=harshit
+                // Output => Hello harshit From Home Page
+               
+8. HTTP Methods =>
+    - GET => Used to request data from a specified resource.
+    - POST => Used to send data to a server to create/update a resource.(
+        - POST is not idempotent, meaning that calling it multiple times will have an effect on the resource.
+        - POST is used to create a resource.
+        - POST is used to update a resource.
+        )
+    - PUT => Used to send data to a server to create/update a resource.(
+        - PUT is idempotent, meaning that calling it multiple times will not have an effect on the resource.
+        - PUT is used to update a resource.
+        - PUT is used to create a resource if it does not exist.
+        - PUT is used to replace a resource if it exists.
+        )
+    - DELETE => Used to delete the specified resource.
+    - PATCH => Used to apply partial modifications to a resource.
+
+9. Introduction to ExpressJS =>
+
+        Question => Why we need ExpressJS?
+        Answer =>
+        - Express is a web application framework for Node.js.
+        - It is designed for building web applications and APIs.
+        - It is built on top of Node.js and provides a simple way to create web servers and handle HTTP requests and responses.
+        - It is a lightweight framework that is easy to learn and use.
+        - It is a popular choice for building RESTful APIs and single-page applications (SPAs).
+        - It is used by many large companies and organizations, including IBM, Uber, and PayPal.
+        - It is open-source and has a large community of developers who contribute to its development and maintenance.
+
+        => install express => npm install express
+
+        Example =>
+            const express = require('express'); // Import express module
+            const app = express(); // Create an instance of express
+
+            app.get('/', (req, res) => { // Handle GET request to the root URL
+                res.send('Hello World'); // Send response to client
+            });
+            app.get('/about', (req, res) => { // Handle GET request to the /about URL
+                res.send('Hello From About Page') // Send response to client
+            })
+
+            app.listen(3000, () => { // Start the server on port 3000
+                console.log('Server started on port 3000'); // Log the server start message
+            });
+
+10. Versioning in ExpressJs =>
+            Example => 4.18.2
+            part1 -> 4(major update)
+            part2 -> 18(Bug fix)
+            part3 -> 2(minor update)
+
+            ^ => meaning=>   install latest version of express => npm install express@^4.18.2
+            ~ => install latest version of express => npm install express@~4.18.2
+
+            => install specific version of express => npm install express@4.18.2
+            => install latest version of express => npm install express@latest
+
+11. Intro to Rest API =>
+        Rules=>
+        - user server client architecture    
+        - Use HTTP methods to perform CRUD operations
+        - Use URL to identify the resource
+        - Use JSON to send and receive data
+        - Use status codes to indicate the success or failure of the request
+        - Use versioning to manage changes to the API
+        - Use authentication and authorization to secure the API
+        
+12. Build Rest Api =>  
+        
+        ++++++++++++ TASK ++++++++++++
+        Create a REST API for managing users with the following endpoints:
+
+        REST API -> JSON
+
+        GET /users -> List all user Name -> DONE
+        GET /api/users -> List all user -> DONE
+
+        GET /api/users/:id -> Get user by id // dynamic path parameter -> DONE
+        :id => dynamic path parameter
+
+        POST /api/users -> Create a new user
+        PATCH /api/users/{id} -> Update user by id
+        DELETE /api/users/{id} -> Delete user by id
+
+
+Create a middleware to get the data come from frontend 
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data
+       
