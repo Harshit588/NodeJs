@@ -18,6 +18,8 @@ const pool = mysql.createPool({
     port: 3306 // Ensure it's 3306
 });
 
+
+
 //++++++++++++++++++++++++++++++++++ USERS ++++++++++++++++++++++++++++++++++++++++++++++++
 app.route('/users')
     // GET all users using mysql2   
@@ -345,6 +347,63 @@ app.route('/borrow/:id')
                 res.status(500).json({ error: err.message });
             });
     });
+
+// Home Page Route
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: "🏠 Welcome to the Library System API",
+        status: "success",
+        documentation: "http://localhost:3000/docs",
+        availableRoutes: {
+            books: "/books",
+            users: "/users",
+            borrowRecords: "/borrow"
+        }
+    });
+});
+
+// API Documentation Route
+app.get('/docs', (req, res) => {
+    res.status(200).json({
+        project: "📚 Library System API",
+        description: "A RESTful API for managing books, users, and borrow records in a library.",
+        techStack: ["Node.js", "Express.js", "MySQL", "mysql2"],
+        features: [
+            "📖 Manage books (CRUD operations)",
+            "👤 Manage users (CRUD operations)",
+            "📅 Track borrow and return records",
+            "🔍 Search books and users",
+            "✅ Data validation & security"
+        ],
+        endpoints: {
+            home: { method: "GET", url: "/" },
+            books: {
+                getAll: { method: "GET", url: "/books" },
+                getById: { method: "GET", url: "/books/:id" },
+                create: { method: "POST", url: "/books" },
+                update: { method: "PUT", url: "/books/:id" },
+                delete: { method: "DELETE", url: "/books/:id" }
+            },
+            users: {
+                getAll: { method: "GET", url: "/users" },
+                getById: { method: "GET", url: "/users/:id" },
+                create: { method: "POST", url: "/users" },
+                update: { method: "PUT", url: "/users/:id" },
+                delete: { method: "DELETE", url: "/users/:id" }
+            },
+            borrowRecords: {
+                getAll: { method: "GET", url: "/borrow" },
+                getById: { method: "GET", url: "/borrow/:id" },
+                create: { method: "POST", url: "/borrow" },
+                update: { method: "PUT", url: "/borrow/:id" },
+                delete: { method: "DELETE", url: "/borrow/:id" }
+            }
+        },
+        repository: "https://github.com/your-username/library-system-api",
+        status: "✅ API is running"
+    });
+});
+
 
 // Start the server
 app.listen(port, () => {
