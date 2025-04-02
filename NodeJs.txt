@@ -471,6 +471,43 @@ Complete notes of NodeJS =>
         DELETE /api/users/{id} -> Delete user by id
 
 
-Create a middleware to get the data come from frontend 
-app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data
-       
+13. Middleware in Express => 
+    - Middleware is a function that has access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle.
+   
+    - Middleware can perform the following tasks:
+        - Execute any code.
+        - Make changes to the request and response objects.
+        - End the request-response cycle.
+        - Call the next middleware function in the stack.
+
+    - Middleware can be used for:
+        - Logging
+        - Authentication
+        - Error handling
+        - Request parsing
+        - Response formatting
+
+        Example =>  
+            const express = require('express'); // Import express module
+            const app = express(); // Create an instance of express
+
+            // Middleware function
+            const myMiddleware = (req, res, next) => {
+                console.log('Middleware function called'); // Log the request
+                next(); // Call the next middleware function
+            }
+
+            app.use(myMiddleware); // Use the middleware function
+
+            app.get('/', (req, res) => { // Handle GET request to the root URL
+                res.send('Hello World'); // Send response to client
+            });
+
+            app.listen(3000, () => { // Start the server on port 3000
+                console.log('Server started on port 3000'); // Log the server start message
+            });
+        Output => 
+            // Output => Server started on port 3000
+            // Output => Middleware function called
+            // Open the browser and type => http://localhost:3000
+            // Output => Hello World
