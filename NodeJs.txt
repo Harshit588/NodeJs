@@ -1,4 +1,3 @@
-
 Complete notes of NodeJS =>
 
 1. setup => Download and install NodeJS
@@ -470,7 +469,6 @@ Complete notes of NodeJS =>
         PATCH /api/users/{id} -> Update user by id
         DELETE /api/users/{id} -> Delete user by id
 
-
 13. Middleware in Express => 
     - Middleware is a function that has access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle.
    
@@ -513,47 +511,72 @@ Complete notes of NodeJS =>
             // Output => Hello World
 
 14. Headers in Express =>
-    - Headers are key-value pairs that are sent in the request and response objects.
-    - Headers can be used to send additional information about the request or response.
-    - Headers can be used to control the behavior of the request or response.
-    - Headers can be used to send metadata about the request or response.
-    - Headers can be used to send authentication information.
-    - Headers can be used to send content type information.
-    - Headers can be used to send caching information.
-    - Headers can be used to send security information.
+            - Headers are key-value pairs that are sent in the request and response objects.
+            - Headers can be used to send additional information about the request or response.
+            - Headers can be used to control the behavior of the request or response.
+            - Headers can be used to send metadata about the request or response.
+            - Headers can be used to send authentication information.
+            - Headers can be used to send content type information.
+            - Headers can be used to send caching information.
+            - Headers can be used to send security information.
 
-    Example1 => Built-In Headers =>
+            Example1 => Built-In Headers =>
 
-        const express = require('express'); // Import express module
-        const app = express(); // Create an instance of express
+                const express = require('express'); // Import express module
+                const app = express(); // Create an instance of express
 
-        app.get('/', (req, res) => { // Handle GET request to the root URL
-            res.setHeader('Content-Type', 'text/html'); // Set the content type header
-            res.send('<h1>Hello World</h1>'); // Send response to client
-        });
+                app.get('/', (req, res) => { // Handle GET request to the root URL
+                    res.setHeader('Content-Type', 'text/html'); // Set the content type header
+                    res.send('<h1>Hello World</h1>'); // Send response to client
+                });
 
-        app.listen(3000, () => { // Start the server on port 3000
-            console.log('Server started on port 3000'); // Log the server start message
-        });
-        Output => 
-            // Output => Server started on port 3000
-            // Open the browser and type => http://localhost:3000
-            // Output => Hello World
+                app.listen(3000, () => { // Start the server on port 3000
+                    console.log('Server started on port 3000'); // Log the server start message
+                });
+            Output => 
+                 // Output => Server started on port 3000
+                 // Open the browser and type => http://localhost:3000
+                // Output => Hello World
 
-    Example2 => Custom Headers => 
-        const express = require('express'); // Import express module
-        const app = express(); // Create an instance of express
+            Example2 => Custom Headers => 
+                const express = require('express'); // Import express module
+                const app = express(); // Create an instance of express
 
-        app.get('/', (req, res) => { // Handle GET request to the root URL
-            res.setHeader('X-Powered-By', 'Node.js'); // Set a custom header
-            res.send('<h1>Hello World</h1>'); // Send response to client
-        });
+                app.get('/', (req, res) => { // Handle GET request to the root URL
+                    res.setHeader('X-Powered-By', 'Node.js'); // Set a custom header
+                    res.send('<h1>Hello World</h1>'); // Send response to client
+                });
 
-        app.listen(3000, () => { // Start the server on port 3000
-            console.log('Server started on port 3000'); // Log the server start message
-        });
-        Output => 
-            // Output => Server started on port 3000
-            // Open the browser and type => http://localhost:3000
-            // Output => Hello World
-        
+                app.listen(3000, () => { // Start the server on port 3000
+                    console.log('Server started on port 3000'); // Log the server start message
+                });
+            Output => 
+                // Output => Server started on port 3000
+                // Open the browser and type => http://localhost:3000
+                // Output => Hello World
+
+            Example3 => Headers in Request => 
+                const express = require('express')
+                const app = express()
+                const port = 3000
+
+
+
+                app.get('/', (req, res) => {
+                    console.log(req.headers);
+                    res.setHeader('X-myName', 'Harshit')
+                    res.send('Hello World!')
+                })
+                app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+            Output => purpose: 'Learn Express JS',
+                
+        Ques => how to send headers in request using Postman?
+        Ans =>
+        - Open Postman
+        - Select the request type (GET, POST, PUT, DELETE, etc.)
+        - Enter the URL
+        - Click on the Headers tab
+        - Enter the key-value pairs for the headers
+        - Click on the Send button
+        - and Collect the response and print the headers in console
+        - console.log(req.headers);
