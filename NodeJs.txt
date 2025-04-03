@@ -612,4 +612,14 @@ Complete notes of NodeJS =>
 
         5. Server error responses (500-599)
             
+16. MCV Architecture =>
 
+    - Model-View-Controller (MVC) is a software architectural pattern for implementing user interfaces.
+    - It divides an application into three interconnected components:
+        1. Model: Represents the data and business logic of the application.
+        2. View: Represents the user interface of the application.
+        3. Controller: Handles the user input and interacts with the model and view.
+
+    - The MVC pattern separates the concerns of the application, making it easier to manage and maintain.
+    - It allows for a clear separation of concerns, making it easier to test and debug the application.
+    - It allows for a clear separation of concerns, making it easier to scale the application.
