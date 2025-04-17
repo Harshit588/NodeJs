@@ -623,3 +623,43 @@ Complete notes of NodeJS =>
     - The MVC pattern separates the concerns of the application, making it easier to manage and maintain.
     - It allows for a clear separation of concerns, making it easier to test and debug the application.
     - It allows for a clear separation of concerns, making it easier to scale the application.
+
+17. short url api => 
+        check  project -> D:\INDEW\NodeJs\11_URL_Shortern_Api
+
+18. Server Side Rendering => 
+        - Server-side rendering (SSR) is a technique used in web development where the HTML of a web page is generated on the server and sent to the client.
+        - This allows for faster initial page loads and better SEO, as search engines can crawl the HTML content.
+
+        a. ejs => EJS is a templating engine for Node.js that allows you to generate HTML pages using JavaScript.
+               
+                Download -> npm install ejs
+
+                index.js => 
+                    const express = require('express'); // Import express module
+                    const app = express(); // Create an instance of express
+
+                    app.set('view engine', 'ejs'); // Set the view engine to EJS
+                    app.set('views', path.resolve("./views")); // Set the views directory
+
+                    app.get('/', (req, res) => { // Handle GET request to the root URL
+                        res.render('index'); // Render the index.ejs file 
+                    });
+
+                    app.listen(3000, () => { // Start the server on port 3000
+                        console.log('Server started on port 3000'); // Log the server start message
+                    });
+
+                index.ejs => 
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Document</title>
+                    </head>
+                    <body>
+                        <h1>Hello World</h1>
+                    </body>
+                    </html>
+            

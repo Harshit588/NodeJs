@@ -1,27 +1,10 @@
 const { nanoid } = require('nanoid');
 const db = require('../config/mysqlDbConfig');
-const { initDb } = require('../models/urlShort');
 
 async function generateNewShortUrl(req, res) {
 
-    // Get Conncection check
-    db.getConnection((err, connection) => {
-        if (err) {
-            console.error("❌ DB Connection Failed:", err.message);
-        } else {
-            console.log("✅ DB Connected Successfully");
-            connection.release();
-        }
-    });
-
-    // create tables
-    console.log((await initDb()).toString());
-
-
     const { url } = req.body;
-    
     const redirectURL = url;
-
 
     if (!redirectURL) {
         return res.status(400).json({
@@ -36,14 +19,22 @@ async function generateNewShortUrl(req, res) {
     try {
         const [result] = await db.promise().query(insertQuery, [shortId, redirectURL]);
 
-        return res.status(201).json({
-            Id: result.insertId,
-            success: true,
-            message: 'Short URL created successfully',
-            shortUrl: `http://localhost:3000/api/short/${shortId}`,
-            shortId,
-            redirectURL
-        });
+        const id = `http://localhost:3000/api/short/${shortId}`;
+
+        return res.render('home', {
+            shortID: id
+        })
+
+        // Return JSON data =>
+        // return res.status(201).json({
+        //     Id: result.insertId,
+        //     success: true,
+        //     message: 'Short URL created successfully',
+        //     shortUrl: `http://localhost:3000/api/short/${shortId}`,
+        //     shortId,
+        //     redirectURL
+        // });
+
     } catch (err) {
         console.error("Insert Error:", err.message);
         return res.status(500).json({
@@ -78,8 +69,39 @@ async function handleRedirect(req, res) {
     });
 }
 
+async function getAllUrlsWithVisits(req, res) {
+    const urlQuery = `SELECT * FROM urls`;
+    const visitQuery = `SELECT * FROM visit_history ORDER BY visitedAt ASC`;
+
+    try {
+        const [urls] = await db.promise().query(urlQuery);
+        const [visits] = await db.promise().query(visitQuery);
+
+        // Group visit history under corresponding URL
+        const urlMap = urls.map(url => {
+            const visitHistory = visits
+                .filter(v => v.url_id === url.id)
+                .map(v => ({
+                    visitId: v.id,
+                    visitedAt: v.visitedAt
+                }));
+            return {
+                ...url,
+                visitHistory
+            };
+        });
+        console.log("Send all Data to Client in JSON formate");
+
+        res.status(200).json(urlMap);
+
+    } catch (error) {
+        console.error("Fetch error:", error.message);
+        res.status(500).send("Server error");
+    }
+}
 
 module.exports = {
     generateNewShortUrl,
-    handleRedirect
+    handleRedirect,
+    getAllUrlsWithVisits
 };

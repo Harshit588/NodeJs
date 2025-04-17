@@ -1,7 +1,17 @@
 const db = require("../config/mysqlDbConfig");
 
 async function initDb() {
+
     const logs = [];
+
+    db.getConnection((err, connection) => {
+        if (err) {
+            logs.push("\n❌ DB Connection Failed:", err.message, "\n");
+        } else {
+            logs.push("✅ DB Connected Successfully");
+            connection.release();
+        }
+    });
 
     const createUrlsTable = `
         CREATE TABLE IF NOT EXISTS urls (
@@ -22,7 +32,7 @@ async function initDb() {
 
     try {
         await db.promise().query(createUrlsTable);
-        logs.push("✅ urls table is ready in DB");
+        logs.push("\n✅ urls table is ready in DB");
     } catch (err) {
         logs.push("❌ Error creating urls table: " + err.message);
     }
@@ -34,9 +44,8 @@ async function initDb() {
         logs.push("❌ Error creating visit_history table: " + err.message);
     }
 
-    return logs;
+    console.log(logs.toString());
 }
-
 module.exports = {
     initDb
 };
