@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Shortener</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+      margin: 0;
+    }
+
+    h1 {
+      color: #222;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 90%;
+      max-width: 450px;
+    }
+
+    input[type="url"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 18px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #43a047;
+    }
+
+    .result {
+      margin-top: 25px;
+      background: #ffffff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+    }
+
+    .result a {
+      color: #1976d2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .result a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🔗 URL Shortener</h1>
+
+  <form method="post" action="./api/short">
+    <input type="url" name="url" placeholder="Enter your original URL" required />
+    <button type="submit">Shorten URL</button>
+  </form>
+
+  <% if (locals.shortID) { %>
+  <div class="result">
+    <p>Short URL generated:</p>
+    <p>
+      <a href="<%= shortID %>" target="_blank"><%= shortID %></a>
+    </p>
+  </div>
+  <% } %>
+
+</body>
+
+</html>
