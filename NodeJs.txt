@@ -663,3 +663,16 @@ Complete notes of NodeJS =>
                     </body>
                     </html>
             
+19. Authentication ->
+
+        1. Stateful Authentication => 
+            - In stateful authentication, the server maintains the state of the user session.
+            - The server stores the user session information in memory or a database.
+            - The server sends a session ID to the client, which is stored in a cookie.
+            - The client sends the session ID with each request to authenticate the user.
+
+        2. Stateless Authentication => 
+            - In stateless authentication, the server does not maintain the state of the user session.
+            - The client sends the user credentials with each request to authenticate the user.
+            - The server verifies the user credentials and sends a token to the client.
+            - The client stores the token and sends it with each request to authenticate the user.
