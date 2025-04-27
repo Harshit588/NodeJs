@@ -1,4 +1,6 @@
+const { v4: uuidv4 } = require('uuid');
 const db = require('../config/mysqlDbConfig');
+const { setUser } = require('../service/auth');
 
 // Function to handle user signup
 const userSignUp = (req, res) => {
@@ -22,9 +24,6 @@ const userSignUp = (req, res) => {
         });
 };
 
-
-
-
 // Function to handle user login
 async function userLogin(req, res) {
     try {
@@ -34,21 +33,18 @@ async function userLogin(req, res) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
-        console.log('Login attempt with email:', email);
-        console.log('Password:', password);
-
         const selectQuery = `SELECT * FROM users WHERE email = "${email}" AND password = ${password}`;
 
-        console.log(selectQuery);
+        const [user] = await db.query(selectQuery);
 
-        const [rows] = await db.query(selectQuery);
-        console.log('DB Result:', rows); // Log the rows to check if they're being fetched
-
-        if (rows.length === 0) {
+        if (user.length === 0) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         // If a user was found, proceed with success
+        const sessionId = uuidv4();
+        setUser(sessionId, user);
+        res.cookie('uid', sessionId);
         return res.redirect('/')
         // res.status(200).json({ loginStatus: 'User logged in successfully!' });
 
@@ -57,7 +53,6 @@ async function userLogin(req, res) {
         res.status(500).json({ message: 'Error logging in', error: error.message });
     }
 }
-
 
 module.exports = {
     userSignUp,

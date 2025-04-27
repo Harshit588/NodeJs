@@ -1,39 +1,34 @@
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser')
 
 const urlRoute = require('./routes/url');
 const staticRoute = require('./routes/staticRouter')
 const userRoute = require('./routes/user');
+const { initDb } = require('./models/urlShort');
+const { restrictToLoggedUserOnly } = require('./middleware/auth');
 
 const app = express();
 const port = 3000;
 
-const { initDb } = require('./models/urlShort');
-
 // create tables and Connect DB
 initDb();
 
-// Middleware to parse incoming JSON requests
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-// Set the view engine to EJS 
+// View engine
 app.set('view engine', 'ejs');
+app.set("views", path.resolve("./views"));
 
-// Set the views directory
-app.set("views", path.resolve("./views"))
+// Public routes (no authentication needed)
+app.use('/api/user', userRoute); // signup, login
 
-// Use routes
-app.use('/api/short', urlRoute); // POST, GET Shorten URL APIs
-
-// Handle redirect for short URL access
-// app.use('/api/short/:shortId', urlRoute); // GET http://localhost:3000/q0HiSbPk
-
-// redirect to Home page 
-app.use('/', staticRoute)
-
-// redirect to signup and Login page
-app.use('/api/user', userRoute); // POST http://localhost:3000/api/user/signup
+// Protected routes (authentication required)
+app.use('/', restrictToLoggedUserOnly, staticRoute);
+app.use('/api/short', restrictToLoggedUserOnly, urlRoute);
 
 // Start server
 app.listen(port, () => {

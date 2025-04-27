@@ -50,13 +50,22 @@ function handleRedirect(req, res) {
     const shortId = req.params.shortId;
     console.log("shortId:", shortId);
 
-    const findQuery = `SELECT * FROM urls WHERE shortId = ?`;
+    if (!shortId) {
+        return res.status(400).json({ message: "Short ID is required" });
+    }
+
+    const findQuery = `SELECT redirectURL FROM urls WHERE shortId = ? LIMIT 1`;
+
+    // Increase timeout duration to allow more time for DB query
     const timeout = setTimeout(() => {
         console.error("DB query is hanging ❌");
-    }, 3000);
+        return res.status(500).json({ message: "DB query timed out" });
+    }, 10000); // Increased timeout to 10 seconds
 
+    console.log("Executing DB query...");
     db.query(findQuery, [shortId], (err, results) => {
         clearTimeout(timeout); // clear if query finishes
+        console.log("DB query completed");
 
         if (err) {
             console.error("DB ERROR:", err.message);
@@ -64,12 +73,19 @@ function handleRedirect(req, res) {
         }
 
         console.log("Query results:", results);
+
         if (results.length === 0) {
+            console.error("No results found for shortId:", shortId);
             return res.status(404).json({ message: "Short URL not found" });
         }
 
         const url = results[0];
         let redirectURL = url.redirectURL;
+
+        if (!redirectURL) {
+            console.error("Redirect URL is empty for shortId:", shortId);
+            return res.status(400).json({ message: "Invalid redirect URL" });
+        }
 
         if (!redirectURL.startsWith("http://") && !redirectURL.startsWith("https://")) {
             redirectURL = "http://" + redirectURL;
@@ -78,7 +94,6 @@ function handleRedirect(req, res) {
         console.log("Redirecting to:", redirectURL);
         return res.redirect(redirectURL);
     });
-
 }
 
 async function getAllUrlsWithVisits(req, res) {
